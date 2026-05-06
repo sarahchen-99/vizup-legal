@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact · VizUp</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "New York", Georgia, serif;
+    background: #FAF8F2;
+    color: #2A2722;
+    line-height: 1.65;
+    padding: 48px 24px 80px;
+    min-height: 100vh;
+  }
+  main { max-width: 560px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #B89968;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 38px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #173A2E;
+    margin-bottom: 10px;
+  }
+  h1 em { font-style: italic; color: #B89968; }
+  .subtitle {
+    font-size: 15px;
+    color: #6B655C;
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+
+  form {
+    background: #FBF7EC;
+    border: 1px solid #E5DFD3;
+    border-radius: 18px;
+    padding: 28px 26px;
+    box-shadow: 0 1px 2px rgba(20,30,25,0.04), 0 8px 24px rgba(20,30,25,0.06);
+  }
+
+  .field { margin-bottom: 18px; }
+  .field:last-of-type { margin-bottom: 22px; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #6B655C;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    color: #2A2722;
+    background: #FAF8F2;
+    border: 1px solid #DDD4BD;
+    border-radius: 12px;
+    padding: 12px 14px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #2F5A4D;
+    background: #FFFFFF;
+  }
+  textarea { resize: vertical; min-height: 140px; line-height: 1.55; }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FBF7EC;
+    background: #173A2E;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+    box-shadow: 0 6px 16px rgba(23,58,46,0.30);
+  }
+  button:hover { transform: translateY(-1px); background: #0E2A20; }
+  button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  button .arrow { font-style: italic; }
+
+  .helper {
+    font-size: 13px;
+    color: #A8A296;
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  .alert {
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .alert.success {
+    background: rgba(124,156,130,0.12);
+    border: 1px solid rgba(124,156,130,0.45);
+    color: #173A2E;
+  }
+  .alert.error {
+    background: rgba(224,112,87,0.10);
+    border: 1px solid rgba(224,112,87,0.45);
+    color: #6B2D1E;
+  }
+  .alert strong { display: block; margin-bottom: 4px; }
+
+  .footer {
+    font-size: 13px;
+    color: #6B655C;
+    margin-top: 36px;
+    text-align: center;
+  }
+  .footer a { color: #2F5A4D; }
+  hr {
+    border: none;
+    border-top: 1px solid #E5DFD3;
+    margin: 36px 0 24px;
+  }
+
+  /* The thanks state: shown after successful submission */
+  .thanks {
+    background: #FBF7EC;
+    border: 1px solid #E5DFD3;
+    border-radius: 18px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(20,30,25,0.04), 0 8px 24px rgba(20,30,25,0.06);
+  }
+  .thanks .seal {
+    display: inline-block;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C9C82, #5B7C61);
+    color: white;
+    font-size: 26px;
+    line-height: 56px;
+    margin-bottom: 16px;
+  }
+  .thanks h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #173A2E;
+    margin-bottom: 8px;
+  }
+  .thanks p {
+    color: #6B655C;
+    font-size: 15px;
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Support</div>
+  <h1>Get in <em>touch</em></h1>
+  <p class="subtitle">Bug reports, suggestions, kind words — they all reach us. We try to reply within 48 hours.</p>
+
+  <!-- Submission form -->
+  <form id="contactForm" action="https://formspree.io/f/mojrwlbv" method="POST">
+    <div id="errorBox" class="alert error hidden">
+      <strong>Couldn't send your message.</strong>
+      <span id="errorText">Please try again, or email us directly.</span>
+    </div>
+
+    <div class="field">
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" required maxlength="100" autocomplete="name" />
+    </div>
+
+    <div class="field">
+      <label for="email">Email (so we can reply)</label>
+      <input type="email" id="email" name="email" required maxlength="200" autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" required maxlength="160" />
+    </div>
+
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required maxlength="4000" placeholder="What's on your mind?"></textarea>
+    </div>
+
+    <!-- Honeypot for spam — bots fill in hidden fields, humans don't -->
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+    <!-- Use the user's email as the reply-to so Gmail "Reply" goes to them -->
+    <input type="hidden" name="_subject" id="subjectMirror" />
+
+    <button type="submit" id="submitBtn">
+      Send Message <span class="arrow">→</span>
+    </button>
+
+    <p class="helper">We don't store anything beyond what you write here. <a href="privacy.html" style="color:#2F5A4D;">Privacy policy</a>.</p>
+  </form>
+
+  <!-- Thanks state, hidden until submission succeeds -->
+  <div id="thanksBox" class="thanks hidden">
+    <div class="seal">✓</div>
+    <h2>Message sent</h2>
+    <p>Thanks for writing in. We'll reply at the email you gave us, usually within 48 hours.</p>
+  </div>
+
+  <hr />
+  <div class="footer">
+    <p><a href="index.html">← Back to legal home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+  </div>
+</main>
+
+<script>
+  // AJAX submit so the user stays on this page (no redirect to formspree.io)
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const errorBox = document.getElementById('errorBox');
+  const errorText = document.getElementById('errorText');
+  const thanksBox = document.getElementById('thanksBox');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorBox.classList.add('hidden');
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+
+    // Mirror the user's subject into _subject so the Gmail thread title is meaningful
+    const subjEl = document.getElementById('subject');
+    document.getElementById('subjectMirror').value = '[VizUp] ' + subjEl.value;
+
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.classList.add('hidden');
+        thanksBox.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const json = await res.json().catch(() => ({}));
+        errorText.textContent = (json.errors && json.errors[0] && json.errors[0].message)
+          || "Something went wrong. Please try again in a moment.";
+        errorBox.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = 'Send Message <span class="arrow">→</span>';
+      }
+    } catch (err) {
+      errorText.textContent = "Couldn't reach the server. Check your connection and try again.";
+      errorBox.classList.remove('hidden');
+      btn.disabled = false;
+      btn.innerHTML = 'Send Message <span class="arrow">→</span>';
+    }
+  });
+</script>
+</body>
+</html>
